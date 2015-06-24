@@ -1,1 +1,1 @@
-?
+var pairwithme = angular.module('PairWithMe', ['ngResource']);
