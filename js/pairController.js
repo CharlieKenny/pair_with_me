@@ -1,53 +1,19 @@
-pairWithMe.controller('PairWithMeCtrl', function() {
+pairWithMe.controller('PairWithMeCtrl', ['GetUsers', function(GetUsers) {
   var self = this;
 
   var yourself = 0;
 
+  GetUsers.success(function(data) {
+    console.log(data)
+    self.cohort = data;
+  }).error(function(data, status){
+    console.log(data, status);
+        self.cohort = [];
+  });
+
   self.choice = '';
 
-// maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
-  self.cohort = [
-    {
-     username: "Alex",
-     pair_id: 1,
-     paired: false
-    },
-    {
-     username: "Ashleigh",
-     pair_id: 2,
-     paired: false
-    },
-    {
-     username: "Andy",
-     pair_id: 3,
-     paired: false
-    },
-    {
-     username: "Charlie",
-     pair_id: 4,
-     paired: false
-    },
-    {
-     username: "Dan B",
-     pair_id: 5,
-     paired: false
-    },
-    {
-     username: "Fiona",
-     pair_id: 6,
-     paired: false
-    },
-        {
-     username: "Jennifer",
-     pair_id: 7,
-     paired: false
-    },
-        {
-     username: "Tim O",
-     pair_id: 8,
-     paired: false
-    }
-  ];
+
 
   self.relations =[
                     //  {"pair1": 6, "pair2": 7}
@@ -68,8 +34,8 @@ pairWithMe.controller('PairWithMeCtrl', function() {
     }
   };
 
-  this.setYourself = function(maker){
-        yourself = maker.pair_id;
+  this.setYourself = function(usernumber){
+    yourself = usernumber;
   };
 
   this.pairedWithMe = function(maker){
@@ -102,4 +68,4 @@ pairWithMe.controller('PairWithMeCtrl', function() {
         alert("Ashleigh has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");
   };
 
-});
+}]);
