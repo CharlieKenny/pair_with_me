@@ -1,7 +1,7 @@
 {
   "name": "pair_with_me",
   "version": "1.0.0",
-  "description": "",
+  "description": "[![Stories in Ready](https://badge.waffle.io/CharlieKenny/pair_with_me.png?label=ready&title=Ready)](https://waffle.io/CharlieKenny/pair_with_me) # pair_with_me",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,5 +28,8 @@
   "dependencies": {
     "express": "^4.13.0",
     "http-server": "^0.8.0"
+  },
+  "directories": {
+    "test": "test"
   }
 }
