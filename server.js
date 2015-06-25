@@ -17,19 +17,22 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
   var pairSchema = mongoose.Schema(
     {
-      username: String
+      username: String,
+      pair_id: { type: Number, max: 100 },
+      paired: Boolean
     }
   )
   var User = mongoose.model('User', pairSchema)
   // var Alex = new User({username: 'Alex'})
   // var Dan = new User({username: 'Dan'})
+  var Derek = new User({username: 'Derek', pair_id: 3, paired: false })
 
   // Alex.save(function (err) {
   //   if (err) return console.error(err);
   // });
-  // Dan.save(function (err) {
-  //   if (err) return console.error(err);
-  // });
+  Derek.save(function (err) {
+    if (err) return console.error(err);
+  });
 
   console.log("We are connected")
   // console.log(Alex.username);
