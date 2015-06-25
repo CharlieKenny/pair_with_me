@@ -14,27 +14,17 @@
   <body ng-controller="PairWithMeCtrl as pairCtrl">
     <div class="container">
       <div class="row">
-        <div class="col-md-3" style="background-color:lavenderblush;"> <image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100"> <p>Alex </p>
-        </div>
-        <div class="col-md-3" style="background-color:lavenderblush;"><image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100"><p>Ashleigh </p></div>
-        <div class="col-md-3" style="background-color:lavenderblush;"><image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100"><p>Andy </p></div>
-        <div class="col-md-3" style="background-color:lavenderblush;"><image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100"><p>Dan B</p></div>
-      </div>
-
-
-    </div>
-    <div class="row">
-        <ul ng-repeat="maker in pairCtrl.cohort">
-        <div class="col-md-3" style="background-color:lavenderblush;">
-            <form action ="">
-            <image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100">
-            <li><input type="radio" ng-click="pairCtrl.setYourself(maker.number)" name="yourself" value={{maker.name}}>
-              {{maker.name}}
-              <button type="button" ng-if="pairCtrl.isButtonDisplayed(maker.number)" ng-click="pairCtrl.pairWith(maker.number)">Pair with this person</button>
-            </li>
+          <ul ng-repeat="maker in pairCtrl.cohort">
+          <div class="col-md-3" style="background-color:lavenderblush;">
+              <form action ="">
+              <image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100">
+              <p>
+              <input type="radio" ng-click="pairCtrl.setYourself(maker.number)" name="yourself" value={{maker.name}}>
+                {{maker.name}}
+                <button type="button" ng-if="pairCtrl.isButtonDisplayed(maker.number)" ng-click="pairCtrl.pairWith(maker.number)">Pair</button>
           </ul>
-        </form>
-    </div>
+             </form>
+      </div>
     <button type="button" ng-click="pairCtrl.randomPairWith()">Surprise Me</button>
   </body>
 </html>
