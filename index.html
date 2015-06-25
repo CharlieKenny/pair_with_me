@@ -10,10 +10,17 @@
    <script src="js/app.js"></script>
    <script src="js/pairController.js"></script>
  </head>
+ <h1> Pair With Me </h1>
 
- <body ng-controller="PairWithMeController as pairMaker">
-   <ul ng-repeat="user in pairMaker.cohort">
-   	<li>{{user.name}}</li>
-   </ul>
+ <body ng-controller="PairWithMeCtrl as pairCtrl">
+   <form action ="">
+      <ul ng-repeat="maker in pairCtrl.cohort">
+         <li><input type="radio" ng-click="pairCtrl.setYourself(maker.number)" name="yourself" value={{maker.name}}>
+             {{maker.name}}
+             <button type="button" ng-if="pairCtrl.isButtonDisplayed(maker.number)" ng-click="pairCtrl.pairWith(maker.number)">Pair with this person</button>
+         </li>
+      </ul>
+   </form>
+   <button type="button" ng-click="pairCtrl.shyPairWith()">Shy/Random Pair</button>
  </body>
 </html>
