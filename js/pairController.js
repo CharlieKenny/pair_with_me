@@ -3,82 +3,103 @@ pairWithMe.controller('PairWithMeCtrl', function() {
 
   var yourself = 0;
 
+  self.choice = '';
+
 // maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
-  this.cohort = [
+  self.cohort = [
     {
-     name: "Alex",
-     number: 1,
-     paired: false,
-     pairedWith: ""
+     username: "Alex",
+     pair_id: 1,
+     paired: false
     },
     {
-     name: "Ashleigh",
-     number: 2,
-     paired: false,
-     pairedWith: ""
+     username: "Ashleigh",
+     pair_id: 2,
+     paired: false
     },
     {
-     name: "Jennifer",
-     number: 3,
-     paired: false,
-     pairedWith: ""
+     username: "Andy",
+     pair_id: 3,
+     paired: false
     },
     {
-     name: "Dan B",
-     number: 4,
-     paired: false,
-     pairedWith: ""
+     username: "Charlie",
+     pair_id: 4,
+     paired: false
     },
     {
-     name: "Andy",
-     number: 5,
-     paired: false,
-     pairedWith: ""
+     username: "Dan B",
+     pair_id: 5,
+     paired: false
     },
     {
-     name: "Charlie",
-     number: 6,
-     paired: false,
-     pairedWith: ""
+     username: "Fiona",
+     pair_id: 6,
+     paired: false
     },
         {
-     name: "Fiona",
-     number: 7,
-     paired: false,
-     pairedWith: ""
+     username: "Jennifer",
+     pair_id: 7,
+     paired: false
     },
         {
-     name: "Tim O",
-     number: 8,
-     paired: false,
-     pairedWith: ""
+     username: "Tim O",
+     pair_id: 8,
+     paired: false
     }
   ];
 
-  this.pairWith = function(pair){
-        console.log("You are paired");
-        // not sure why code below this is 'yourself' and not self.yourself?
-        console.log(yourself);
-        console.log(pair);
-        console.log(this.cohort[7].name);
+  self.relations =[
+                    //  {"pair1": 6, "pair2": 7}
+                    // {"pair1": 3, "pair2": 4},
+                    // {"pair1": 7, "pair2": 0}
+                  ];
+  // self.blacklist = [
+  //                   {"blacklistOwner: 1, "members"{[0,2,3,4]} }
+  //                   ];
+
+  this.pairWith = function(maker){
+    if (yourself !== 0){
+        self.cohort[maker.pair_id-1].paired = true;
+        self.cohort[yourself-1].paired = true;
+        var relationship = {"pair1": yourself, "pair2": maker.pair_id};
+        self.relations.push(relationship);
+        self.choice = self.cohort[yourself-1].username + ' has been paired with ' + self.cohort[maker.pair_id-1].username;
+    }
   };
 
-  this.setYourself = function(usernumber){
-        yourself = usernumber;
+  this.setYourself = function(maker){
+        yourself = maker.pair_id;
   };
 
-  this.randomPairWith = function(pair){
-        console.log("You are randomly paired");
+  this.pairedWithMe = function(maker){
+        var noOfPairs = 0;
+        self.relations.forEach(function(relationship){
+          if ( relationship.pair1 === yourself && relationship.pair2 === maker.pair_id )
+            { noOfPairs++ };
+          if ( relationship.pair2 === yourself && relationship.pair1 === maker.pair_id )
+            { noOfPairs++ };
+        });
+            return noOfPairs;
+  };
+
+  this.shyPairWith = function(pair){
+        console.log("You are shy paired");
         console.log(yourself);
         console.log("random");
   };
 
-  this.isButtonDisplayed = function(usernumber){
-    // don't display the button, if you are the person selected, or you already have a pair.
-    if ( yourself === usernumber ) return false
-    else if ( self.cohort[usernumber-1].pairedWith !== "" ) return false
+  this.isButtonDisplayed = function(maker){
+    // don't display the button, if you are the person selected, or you the maker already have a pair or yourself already has a pair.
+    if ( yourself == 0 ) return false;  // can't pair if you haven't selected yourself
+    if ( yourself === maker.pair_id ) return false
+    else if ( self.cohort[maker.pair_id-1].paired === true ) return false
+    else if ( self.cohort[yourself-1].paired === true ) return false
     else return true;
   };
 
+  this.displayFinalPairs = function(){
+        alert("Ashleigh has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");
+  };
 
 });

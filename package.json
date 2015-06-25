@@ -4,7 +4,8 @@
   "description": "[![Stories in Ready](https://badge.waffle.io/CharlieKenny/pair_with_me.png?label=ready&title=Ready)](https://waffle.io/CharlieKenny/pair_with_me) # pair_with_me",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "protractor": "^2.1.0"
   },
   "dependencies": {
+    "express": "^4.13.0",
     "http-server": "^0.8.0"
   },
   "directories": {
