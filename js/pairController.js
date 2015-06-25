@@ -83,7 +83,6 @@ pairWithMe.controller('PairWithMeCtrl', function() {
             return noOfPairs;
   };
 
-
   this.shyPairWith = function(pair){
         console.log("You are shy paired");
         console.log(yourself);
