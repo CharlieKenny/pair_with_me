@@ -18,25 +18,75 @@ db.once('open', function (callback) {
   var pairSchema = mongoose.Schema(
     {
       username: String,
+      gh_username: String,
       pair_id: { type: Number, max: 100 },
       paired: Boolean
-    }
-  )
-  var User = mongoose.model('User', pairSchema)
-  // var Alex = new User({username: 'Alex'})
-  // var Dan = new User({username: 'Dan'})
-  var Derek = new User({username: 'Derek', pair_id: 3, paired: false })
+    })
 
-  // Alex.save(function (err) {
-  //   if (err) return console.error(err);
-  // });
-  Derek.save(function (err) {
-    if (err) return console.error(err);
-  });
+  var User = mongoose.model('User', pairSchema)
+
+  var cohort = [
+   {
+    username: "Alex",
+    gh_username: "AlexHandy1",
+    pair_id: 1,
+    paired: false
+   },
+   {
+    username: "Ashleigh",
+    gh_username: "ashleigh090990",
+    pair_id: 2,
+    paired: false
+   },
+   {
+    username: "Jennifer",
+    gh_username: "curlygirly",
+    pair_id: 3,
+    paired: false
+   },
+   {
+    username: "Dan B",
+    gh_username: "dan-bolger",
+    pair_id: 4,
+    paired: false
+   },
+   {
+    username: "Andy",
+    gh_username: "andygout",
+    pair_id: 5,
+    paired: false
+   },
+   {
+    username: "Charlie",
+    gh_username: "charliekenny",
+    pair_id: 6,
+    paired: false
+   },
+   {
+    username: "Fiona",
+    gh_username: "smarbaf",
+    pair_id: 7,
+    paired: false
+   },
+   {
+    username: "Tim O",
+    gh_username: "timoxman",
+    pair_id: 8,
+    paired: false
+   }
+ ];
+
+ User.collection.insert(cohort, onInsert);
+
+ function onInsert(err, docs) {
+    if (err) {
+      console.log('your mother');
+    } else {
+      console.info('%d users were successfully stored. Go you.', docs.length);
+    }
+ }
 
   console.log("We are connected")
-  // console.log(Alex.username);
-  // console.log(Dan.username);
 
   app.get('/users', function(req, res, next) {
     User.find(function (err, users) {
