@@ -8,16 +8,18 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/getUsers.js"></script>
+    <script src="js/accessToken.js"></script>
     <script src="js/pairController.js"></script>
+    <script src="js/acquireFactory.js"></script>
+    <script src="js/getUsers.js"></script>
   </head>
-  <h1> Pair With Me </h1>
-  Me / Name / Paired? / No. times paired with me?
+  <h1>Pair With Me</h1>
+    Me / Name / Paired? / No. times paired with me?
   <body ng-controller="PairWithMeCtrl as pairCtrl">
     <div ng-hide="pairCtrl.userChosen" >
       <h4>Which Maker are you?</h4>
-    </div>
-    <div ng-show="pairCtrl.userChosen" >
+      </div>
+      <div ng-show="pairCtrl.userChosen" >
       <h4> Choose your pair?</h4>
     </div>
     <div class="container">
@@ -36,5 +38,8 @@
         <button type="button" id='FinalButton' ng-click="pairCtrl.displayFinalPairs()">Final Pairs</button>
         <div id="choiceDisplay">
           {{pairCtrl.choice}}
-        </body>
-      </html>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
