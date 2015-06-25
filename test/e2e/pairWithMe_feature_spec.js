@@ -57,10 +57,12 @@ describe('Pair With Me', function() {
   it('once PairButton pressed, the screen shows who you are paired with', function() {
     firstThisIsMeButton.click();
     danPairButton.click();
-    expect(listItems.get(3).getText()).toContain('true true');
+    expect(listItems.get(3).getText()).toContain('1');
+    expect(listItems.get(0).getText()).toContain('0');
     danThisIsMeButton.click();
-    expect(listItems.get(0).getText()).toContain('true true');
-    expect(listItems.get(1).getText()).toContain('false false');
+    expect(listItems.get(0).getText()).toContain('1');
+    expect(listItems.get(1).getText()).toContain('0');
+    expect(listItems.get(3).getText()).toContain('0');
   });
 
 

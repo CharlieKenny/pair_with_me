@@ -18,27 +18,27 @@ pairWithMe.controller('PairWithMeCtrl', function() {
      paired: false
     },
     {
-     name: "Jennifer",
+     name: "Andy",
      id: 3,
      paired: false
     },
     {
-     name: "Dan B",
+     name: "Charlie",
      id: 4,
      paired: false
     },
     {
-     name: "Andy",
+     name: "Dan B",
      id: 5,
      paired: false
     },
     {
-     name: "Charlie",
+     name: "Fiona",
      id: 6,
      paired: false
     },
         {
-     name: "Fiona",
+     name: "Jennifer",
      id: 7,
      paired: false
     },
@@ -50,8 +50,8 @@ pairWithMe.controller('PairWithMeCtrl', function() {
   ];
 
   self.relations =[
-                    // {"pair1": 0, "pair2": 1}
-                    // {"pair1": 3, "pair2": 4}
+                    //  {"pair1": 6, "pair2": 7}
+                    // {"pair1": 3, "pair2": 4},
                     // {"pair1": 7, "pair2": 0}
                   ];
   // self.blacklist = [
@@ -68,20 +68,19 @@ pairWithMe.controller('PairWithMeCtrl', function() {
     }
   };
 
-  this.setYourself = function(userNumber){
-        yourself = userNumber;
+  this.setYourself = function(maker){
+        yourself = maker.id;
   };
 
-  this.pairedWithMe = function(userNumber){
+  this.pairedWithMe = function(maker){
         var noOfPairs = 0;
         self.relations.forEach(function(relationship){
-            // if ( relationship.pair1 === yourself && relationship.pair2 === userNumber )
-            //     { noOfPairs++ };
-            // if ( relationship.pair2 === yourself && relationship.pair1 === userNumber )
-            //     { noOfPairs++ };
-            // return noOfPairs;
+          if ( relationship.pair1 === yourself && relationship.pair2 === maker.id )
+            { noOfPairs++ };
+          if ( relationship.pair2 === yourself && relationship.pair1 === maker.id )
+            { noOfPairs++ };
         });
-            return 0;
+            return noOfPairs;
   };
 
 
@@ -91,17 +90,17 @@ pairWithMe.controller('PairWithMeCtrl', function() {
         console.log("random");
   };
 
-  this.isButtonDisplayed = function(usernumber){
+  this.isButtonDisplayed = function(maker){
     // don't display the button, if you are the person selected, or you the maker already have a pair or yourself already has a pair.
     if ( yourself == 0 ) return false;  // can't pair if you haven't selected yourself
-    if ( yourself === usernumber ) return false
-    else if ( self.cohort[usernumber-1].paired === true ) return false
+    if ( yourself === maker.id ) return false
+    else if ( self.cohort[maker.id-1].paired === true ) return false
     else if ( self.cohort[yourself-1].paired === true ) return false
     else return true;
   };
 
-  this.displayFinalPairs = function(usernumber){
-        alert("Ashley has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");
+  this.displayFinalPairs = function(){
+        alert("Ashleigh has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");
   };
 
 });
