@@ -15,11 +15,11 @@ Me / Name / Paired? / No. times paired with me?
  <body ng-controller="PairWithMeCtrl as pairCtrl">
    <form action ="">
       <ul ng-repeat="maker in pairCtrl.cohort | orderBy:pairCtrl.pairedWithMe">
-         <li><input type="radio" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.name}}>
-             <span>{{maker.name}}</span>
+         <li><input type="radio" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}}>
+             <span>{{maker.username}}</span>
              <span>{{maker.paired}}</span>
              <span>{{pairCtrl.pairedWithMe(maker)}}</span>
-             <button type="button" id='pairButton' ng-if="pairCtrl.isButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker.id)">Pair with this person</button>
+             <button type="button" id='pairButton' ng-if="pairCtrl.isButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker)">Pair with this person</button>
          </li>
       </ul>
    </form>
