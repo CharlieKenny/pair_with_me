@@ -10,21 +10,28 @@
     <script src="js/app.js"></script>
     <script src="js/pairController.js"></script>
   </head>
-  <h1> MAKE-R PAIR </h1>
-  <body ng-controller="PairWithMeCtrl as pairCtrl">
-    <div class="container">
-      <div class="row">
-          <ul ng-repeat="maker in pairCtrl.cohort">
-          <div class="col-md-3" style="background-color:lavenderblush;">
-              <form action ="">
-              <image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100">
-              <p>
-              <input type="radio" ng-click="pairCtrl.setYourself(maker.number)" name="yourself" value={{maker.name}}>
-                {{maker.name}}
-                <button type="button" ng-if="pairCtrl.isButtonDisplayed(maker.number)" ng-click="pairCtrl.pairWith(maker.number)">Pair</button>
-          </ul>
-             </form>
-      </div>
-    <button type="button" ng-click="pairCtrl.randomPairWith()">Surprise Me</button>
-  </body>
+ <h1> MAKE-R PAIR </h1>
+ <body ng-controller="PairWithMeCtrl as pairCtrl" >
+ <div ng-hide="pairCtrl.userChosen" >
+ <h4>Which Maker are you?</h4>
+ </div>
+  <div ng-show="pairCtrl.userChosen" >
+ <h4> Choose your pair?</h4>
+ </div>
+
+
+     <div class="container">
+       <div class="row">
+           <div class="col-md-3" ng-repeat="maker in pairCtrl.cohort" style="background-color:lavenderblush;">
+             <form action ="">
+               <image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100">
+               <p>
+                <input type="radio" ng-model="pairCtrl.userChosen" ng-click="pairCtrl.setYourself(maker.number)" name="yourself" value={{maker.name}}>
+               {{maker.name}}
+               <button type="button" ng-if="pairCtrl.isButtonDisplayed(maker.number)" ng-click="pairCtrl.pairWith(maker.number)">Pair</button>
+            </form>
+     </div>
+     <p>
+   <button type="button" ng-click="pairCtrl.randomPairWith()">Surprise Me</button>
+ </body>
 </html>
