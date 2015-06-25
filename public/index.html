@@ -11,16 +11,24 @@
    <script src="js/pairController.js"></script>
  </head>
  <h1> Pair With Me </h1>
-
+Me / Name / Paired? / Paired with me?
  <body ng-controller="PairWithMeCtrl as pairCtrl">
    <form action ="">
       <ul ng-repeat="maker in pairCtrl.cohort">
          <li><input type="radio" id='thisIsMe' ng-click="pairCtrl.setYourself(maker.id)" name="yourself" value={{maker.name}}>
              <span>{{maker.name}}</span>
+             <span>{{maker.paired}}</span>
+             <span>{{pairCtrl.pairedWithMe(maker.id)}}</span>
              <button type="button" id='pairButton' ng-if="pairCtrl.isButtonDisplayed(maker.id)" ng-click="pairCtrl.pairWith(maker.id)">Pair with this person</button>
          </li>
       </ul>
    </form>
    <button type="button" id='RandomButton' ng-click="pairCtrl.shyPairWith()">Shy/Random Pair</button>
+   <button type="button" id='FinalButton' ng-click="pairCtrl.displayFinalPairs()">Final Pairs</button>
+
+
+   <div id="choiceDisplay">
+     {{pairCtrl.choice}}
+   </div>
  </body>
 </html>
