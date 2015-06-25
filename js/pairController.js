@@ -67,8 +67,8 @@ pairWithMe.controller('PairWithMeCtrl', function() {
         yourself = usernumber;
   };
 
-  this.shyPairWith = function(pair){
-        console.log("You are shy paired");
+  this.randomPairWith = function(pair){
+        console.log("You are randomly paired");
         console.log(yourself);
         console.log("random");
   };

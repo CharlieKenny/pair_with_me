@@ -1,26 +1,57 @@
 <!doctype html>
 <html lang="en" ng-app="PairWithMe">
- <head>
-   <meta charset="utf-8">
-   <title>Pair with me</title>
-   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-   <script src="bower_components/jquery/dist/jquery.js"></script>
-   <script src="bower_components/angular/angular.js"></script>
-   <script src="bower_components/angular-resource/angular-resource.js"></script>
-   <script src="js/app.js"></script>
-   <script src="js/pairController.js"></script>
- </head>
- <h1> Pair With Me </h1>
-
- <body ng-controller="PairWithMeCtrl as pairCtrl">
-   <form action ="">
+  <head>
+    <meta charset="utf-8">
+    <title>MAKE A PAIR</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/pairController.js"></script>
+  </head>
+  <h1> MAKE A PAIR </h1>
+  <body ng-controller="PairWithMeCtrl as pairCtrl">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Alex </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Ashleigh </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Andy </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Dan B</p></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Jennifer </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Fiona </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Charlie </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Tim O</p></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Joanne </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Chidu </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Darryl </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Chris</p></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Mollie </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Daniel </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Anna </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Tim R</p></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Rodney </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Stefan </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Rocco </p></div>
+        <div class="col-md-3" style="background-color:lavenderblush;"><p>Mystery</p></div>
+      </div>
+    </div>
+    <form action ="">
       <ul ng-repeat="maker in pairCtrl.cohort">
-         <li><input type="radio" ng-click="pairCtrl.setYourself(maker.number)" name="yourself" value={{maker.name}}>
-             {{maker.name}}
-             <button type="button" ng-if="pairCtrl.isButtonDisplayed(maker.number)" ng-click="pairCtrl.pairWith(maker.number)">Pair with this person</button>
-         </li>
+        <li><input type="radio" ng-click="pairCtrl.setYourself(maker.number)" name="yourself" value={{maker.name}}>
+          {{maker.name}}
+          <button type="button" ng-if="pairCtrl.isButtonDisplayed(maker.number)" ng-click="pairCtrl.pairWith(maker.number)">Pair with this person</button>
+        </li>
       </ul>
-   </form>
-   <button type="button" ng-click="pairCtrl.shyPairWith()">Shy/Random Pair</button>
- </body>
+    </form>
+    <button type="button" ng-click="pairCtrl.randomPairWith()">Surprise Me</button>
+  </body>
 </html>
