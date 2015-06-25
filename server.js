@@ -1,14 +1,19 @@
 var express = require('express')
 
 var app = express();
+var bodyParser = require('body-parser')
 var path = require('path')
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/pairs')
-// 27017
 var db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(express.static(__dirname + '/public'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use('/js', express.static(__dirname + '/js'));
 
+db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function (callback) {
   var pairSchema = mongoose.Schema(
     {
@@ -16,24 +21,27 @@ db.once('open', function (callback) {
     }
   )
   var User = mongoose.model('User', pairSchema)
-  var Alex = new User({username: 'Alex'})
-  var Dan = new User({username: 'Dan'})
+  // var Alex = new User({username: 'Alex'})
+  // var Dan = new User({username: 'Dan'})
 
-  Alex.save(function (err) {
-    if (err) return console.error(err);
-  });
-  Dan.save(function (err) {
-    if (err) return console.error(err);
-  });
+  // Alex.save(function (err) {
+  //   if (err) return console.error(err);
+  // });
+  // Dan.save(function (err) {
+  //   if (err) return console.error(err);
+  // });
 
   console.log("We are connected")
-  console.log(Alex.username);
-  console.log(Dan.username);
-});
+  // console.log(Alex.username);
+  // console.log(Dan.username);
 
-app.use(express.static(__dirname + '/public'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
-app.use('/js', express.static(__dirname + '/js'));
+  app.get('/users', function(req, res, next) {
+    User.find(function (err, users) {
+      if (err) return next(err);
+      res.json(users);
+    });
+  });
+});
 
 app.set('port', process.env.PORT || 3000);
 
