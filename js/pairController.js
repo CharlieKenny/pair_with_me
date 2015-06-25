@@ -34,8 +34,8 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', function(GetUsers) {
     }
   };
 
-  this.setYourself = function(usernumber){
-    yourself = usernumber;
+  this.setYourself = function(maker){
+    yourself = maker.pair_id;
   };
 
   this.pairedWithMe = function(maker){
