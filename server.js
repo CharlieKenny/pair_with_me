@@ -73,6 +73,78 @@ db.once('open', function (callback) {
     gh_username: "timoxman",
     pair_id: 8,
     paired: false
+   },
+   {
+    username: "Rodney",
+    gh_username: "rodcul",
+    pair_id: 9,
+    paired: false
+   },
+   {
+    username: "Anna",
+    gh_username: "AnnaKL",
+    pair_id: 10,
+    paired: false
+   },
+   {
+    username: "Mollie",
+    gh_username: "MollieS",
+    pair_id: 11,
+    paired: false
+   },
+   {
+    username: "Rocco",
+    gh_username: "bagolol",
+    pair_id: 12,
+    paired: false
+   },
+   {
+    username: "Daryl",
+    gh_username: "dwatson62",
+    pair_id: 13,
+    paired: false
+   },
+   {
+    username: "Chris",
+    gh_username: "cmanessis",
+    pair_id: 14,
+    paired: false
+   },
+   {
+    username: "Joanne",
+    gh_username: "zanetton",
+    pair_id: 15,
+    paired: false
+   },
+   {
+    username: "Chidu",
+    gh_username: "chidumaga",
+    pair_id: 16,
+    paired: false
+   },
+   {
+    username: "Stefan",
+    gh_username: "stefan22",
+    pair_id: 17,
+    paired: false
+   },
+   {
+    username: "Daniel",
+    gh_username: "DanielJohnston",
+    pair_id: 18,
+    paired: false
+   },
+   {
+    username: "Tim R",
+    gh_username: "timrobertson0122",
+    pair_id: 19,
+    paired: false
+   },
+   {
+    username: "Mystery Pair",
+    gh_username: "sanjsanj",
+    pair_id: 20,
+    paired: false
    }
  ];
 
