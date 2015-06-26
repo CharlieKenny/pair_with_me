@@ -16,31 +16,30 @@
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   </head>
   <h1>Pair With Me</h1>
-    Me / Name / Paired? / No. times paired with me?
+    <!-- Me / Name / Paired? / No. times paired with me? -->
   <body ng-controller="PairWithMeCtrl as pairCtrl">
     <div ng-hide="pairCtrl.userChosen" >
       <h4>Which Maker are you?</h4>
       </div>
       <div ng-show="pairCtrl.userChosen">
         <h4>Choose your pair</h4>
+        <button class="surpriseMe" type="button" id='RandomButton' ng-click="pairCtrl.shyPairWith()">Surprise Me</button>
       </div>
     <div class="container">
       <div class="row">
         <div class="col-md-3" ng-repeat="maker in pairCtrl.cohort | orderBy:pairCtrl.pairedWithMe">
           <form action ="">
             <image src="{{maker.avatar_url}}" alt="Avatar" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}} type="radio">
-            <!-- <p><input type="radio" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}}></p> -->
             <p>{{maker.username}}</p>
-            <span>{{maker.paired}}</span>
-            <span>{{pairCtrl.pairedWithMe(maker)}}</span>
-            <button type="button" ng-model="pairCtrl.pairWith" id='pairButton' ng-if="pairCtrl.isPairButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker)">Pair</button>
-            <button type="button" id='blacklistButton' ng-if="pairCtrl.isBlackListButtonDisplayed(maker)" ng-click="pairCtrl.blackListMaker(maker)">Blacklist this person</button>
-            <button type="button" id='unBlacklistButton' ng-if="pairCtrl.isUnBlackListButtonDisplayed(maker)" ng-click="pairCtrl.unBlackListMaker(maker)">Un-Blacklist this person</button>
+            <!-- <span>{{maker.paired}}</span> -->
+            <!-- <span>{{pairCtrl.pairedWithMe(maker)}}</span> -->
+            <button class="ashleighButtons" type="button" ng-model="pairCtrl.pairWith" id='pairButton' ng-if="pairCtrl.isPairButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker)">Pair</button>
+            <button class="ashleighButtons" type="button" id='blacklistButton' ng-if="pairCtrl.isBlackListButtonDisplayed(maker)" ng-click="pairCtrl.blackListMaker(maker)">Blacklist this person</button>
+            <button class="ashleighButtons" type="button" id='unBlacklistButton' ng-if="pairCtrl.isUnBlackListButtonDisplayed(maker)" ng-click="pairCtrl.unBlackListMaker(maker)">Un-Blacklist this person</button>
           </form>
         </div>
-        <button type="button" id='RandomButton' ng-click="pairCtrl.shyPairWith()">Surprise Me</button>
-        <button type="button" id='FinalButton' ng-click="pairCtrl.displayFinalPairs()">Final Pairs</button>
-        <div id="choiceDisplay">
+        <button class="fionaButtons" type="button" id='FinalButton' ng-click="pairCtrl.displayFinalPairs()">Final Pairs</button>
+        <div class="choiceDisplay" id="choiceDisplay">
           {{pairCtrl.choice}}
         </div>
       </div>
