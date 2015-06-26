@@ -26,7 +26,7 @@
       <div class="row">
         <div class="col-md-3" ng-repeat="maker in pairCtrl.cohort | orderBy:pairCtrl.pairedWithMe" style="background-color:lavenderblush;">
           <form action ="">
-            <image src="https://avatars1.githubusercontent.com/u/4478671?v=3&s=100">
+            <image src="{{maker.avatar_url}}&s=130" alt="Avatar">
             <input type="radio" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}}>
             <span>{{maker.username}}</span>
             <span>{{maker.paired}}</span>

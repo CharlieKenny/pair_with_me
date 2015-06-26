@@ -58,7 +58,7 @@ db.once('open', function (callback) {
    },
    {
     username: "Charlie",
-    gh_username: "charliekenny",
+    gh_username: "CharlieKenny",
     pair_id: 6,
     paired: false
    },
