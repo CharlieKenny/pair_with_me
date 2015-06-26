@@ -5,79 +5,93 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
   var yourself = 0;
 
   window.onload = function() {
-    self.cohort.forEach(function(student) {
-      Search.query(student.gh_username)
-      .then(collectResults)
-    })
 
-    function collectResults(response) {
+    GetUsers.success(function(data) {
+      console.log(data)
+      self.cohort = data;
+      acquireAvatars();
+    }).error(function(data, status){
+      console.log(data, status);
+      self.cohort = [];
+    });
+
+    function acquireAvatars() {
       self.cohort.forEach(function(student) {
-        if(student.gh_username == response.data.login) {
-          student['avatar_url'] = response.data.avatar_url;
-        }
+        Search.query(student.gh_username)
+        .then(collectResults)
       })
+
+      function collectResults(response) {
+        self.cohort.forEach(function(student) {
+          if(student.gh_username == response.data.login) {
+            student['avatar_url'] = response.data.avatar_url;
+          }
+        })
+      }
     }
   }
 
-// maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
-  self.cohort = [
-    {
-     name: "Alex",
-     gh_username: "AlexHandy1",
-     number: 1,
-     paired: false
-    },
-    {
-     name: "Ashleigh",
-     gh_username: "ashleigh090990",
-     number: 2,
-     paired: false
-    },
-    {
-     name: "Jennifer",
-     gh_username: "curlygirly",
-     number: 3,
-     paired: false
-    },
-    {
-     name: "Dan B",
-     gh_username: "dan-bolger",
-     number: 4,
-     paired: false
-    },
-    {
-     name: "Andy",
-     gh_username: "andygout",
-     number: 5,
-     paired: false
-    },
-    {
-     name: "Charlie",
-     gh_username: "charliekenny",
-     number: 6,
-     paired: false
-    },
-    {
-     name: "Fiona",
-     gh_username: "smarbaf",
-     number: 7,
-     paired: false
-    },
-    {
-     name: "Tim O",
-     gh_username: "timoxman",
-     number: 8,
-     paired: false
-    }
-  ]
+  // GetUsers.success(function(data) {
+  //   console.log(data)
+  //   self.cohort = data;
+  // }).error(function(data, status){
+  //   console.log(data, status);
+  //   self.cohort = [];
+  // });
 
-  GetUsers.success(function(data) {
-    console.log(data)
-    self.cohort = data;
-  }).error(function(data, status){
-    console.log(data, status);
-        self.cohort = [];
-  });
+// // maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
+//   self.cohort = [
+//     {
+//      name: "Alex",
+//      gh_username: "AlexHandy1",
+//      number: 1,
+//      paired: false
+//     },
+//     {
+//      name: "Ashleigh",
+//      gh_username: "ashleigh090990",
+//      number: 2,
+//      paired: false
+//     },
+//     {
+//      name: "Jennifer",
+//      gh_username: "curlygirly",
+//      number: 3,
+//      paired: false
+//     },
+//     {
+//      name: "Dan B",
+//      gh_username: "dan-bolger",
+//      number: 4,
+//      paired: false
+//     },
+//     {
+//      name: "Andy",
+//      gh_username: "andygout",
+//      number: 5,
+//      paired: false
+//     },
+//     {
+//      name: "Charlie",
+//      gh_username: "charliekenny",
+//      number: 6,
+//      paired: false
+//     },
+//     {
+//      name: "Fiona",
+//      gh_username: "smarbaf",
+//      number: 7,
+//      paired: false
+//     },
+//     {
+//      name: "Tim O",
+//      gh_username: "timoxman",
+//      number: 8,
+//      paired: false
+//     }
+//   ]
+
+
 
   self.choice = '';
 
