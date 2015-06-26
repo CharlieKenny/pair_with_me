@@ -58,7 +58,7 @@ db.once('open', function (callback) {
    },
    {
     username: "Charlie",
-    gh_username: "charliekenny",
+    gh_username: "CharlieKenny",
     pair_id: 6,
     paired: false
    },
@@ -78,7 +78,7 @@ db.once('open', function (callback) {
 
 // comment this fucker out tomorrow - drop the db first then only allow the below to happen once
 // cheers!
- // User.collection.insert(cohort, onInsert);
+ User.collection.insert(cohort, onInsert);
 
  function onInsert(err, docs) {
     if (err) {

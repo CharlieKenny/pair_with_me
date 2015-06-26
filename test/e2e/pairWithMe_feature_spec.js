@@ -9,7 +9,6 @@ describe('Pair With Me', function() {
     browser.get('http://localhost:3000');
   });
 
-
   it('has a title', function(){
    expect(browser.getTitle()).toEqual('Pair with me');
   });
