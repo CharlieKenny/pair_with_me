@@ -19,7 +19,7 @@ h4 {
 .row {
   width: 840px;
   position: relative;
-  left: 180px;
+  left: 165px;
 }
 
 .col-md-3 {
@@ -31,3 +31,6 @@ h4 {
   margin: 5px;
 }
 
+img {
+  width: 130px;
+}

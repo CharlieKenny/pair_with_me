@@ -30,8 +30,6 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
       }
     }
   }
-
-<<<<<<< HEAD
 // maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
   // pairWithpp
   GetUsers.success(function(data) {
@@ -41,7 +39,7 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
     console.log(data, status);
         self.cohort = [];
   });
-=======
+
 // // maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
 //   self.cohort = [
 //     {
@@ -94,9 +92,6 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
 //     }
 //   ]
 
-
->>>>>>> a89600ad427c382b40895cae99ed28a2a885d461
-
   self.choice = '';
 
   self.relations =[
@@ -123,6 +118,7 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
 // sets the maker passed to be 'yourself'
   self.setYourself = function(maker){
     yourself = maker.pair_id;
+    self.userChosen = true;
   };
 
 // returns the number of times the maker passed in has been paired with 'yourself'
@@ -161,12 +157,11 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
     else return true;
   };
 
-<<<<<<< HEAD
 // decide if to display question
   self.isQuestionDisplayed = function(){
     return yourself;
   }
-=======
+
 // checks whether to dispay the blacklist button
   this.isBlackListButtonDisplayed = function(maker){
     if ( yourself == 0 ) return false;
@@ -217,7 +212,6 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
     if (self._isMakerBlacklisted(maker)) return true;
     return false;
   };
->>>>>>> a89600ad427c382b40895cae99ed28a2a885d461
 
   self.displayFinalPairs = function(){
     alert("Ashleigh has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");

@@ -22,18 +22,18 @@
       <h4>Which Maker are you?</h4>
       </div>
       <div ng-show="pairCtrl.userChosen">
-        <h4 ng-if="pairCtrl.isQuestionDisplayed()">Choose your pair</h4>
+        <h4>Choose your pair</h4>
       </div>
     <div class="container">
       <div class="row">
         <div class="col-md-3" ng-repeat="maker in pairCtrl.cohort | orderBy:pairCtrl.pairedWithMe">
           <form action ="">
-            <image src="{{maker.avatar_url}}&s=130" alt="Avatar">
-            <p><input type="radio" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}}></p>
+            <image src="{{maker.avatar_url}}" alt="Avatar" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}} type="radio">
+            <!-- <p><input type="radio" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}}></p> -->
             <p>{{maker.username}}</p>
             <span>{{maker.paired}}</span>
             <span>{{pairCtrl.pairedWithMe(maker)}}</span>
-            <button type="button" ng-model="pairCtrl.pairWith" id='pairButton' ng-if="pairCtrl.isButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker)">Pair</button>
+            <button type="button" ng-model="pairCtrl.pairWith" id='pairButton' ng-if="pairCtrl.isPairButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker)">Pair</button>
             <button type="button" id='blacklistButton' ng-if="pairCtrl.isBlackListButtonDisplayed(maker)" ng-click="pairCtrl.blackListMaker(maker)">Blacklist this person</button>
             <button type="button" id='unBlacklistButton' ng-if="pairCtrl.isUnBlackListButtonDisplayed(maker)" ng-click="pairCtrl.unBlackListMaker(maker)">Un-Blacklist this person</button>
           </form>
