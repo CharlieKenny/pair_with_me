@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-md-3" ng-repeat="maker in pairCtrl.cohort | orderBy:pairCtrl.pairedWithMe">
           <form action ="">
-            <image src="{{maker.avatar_url}}" alt="Avatar" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}} type="radio">
+            <image ng-src="{{maker.avatar_url}}" alt="Avatar" ng-model="pairCtrl.userChosen" id='thisIsMe' ng-click="pairCtrl.setYourself(maker)" name="yourself" value={{maker.username}} type="radio">
             <p>{{maker.username}}</p>
             <!-- <span>{{maker.paired}}</span> -->
             <!-- <span>{{pairCtrl.pairedWithMe(maker)}}</span> -->
@@ -44,5 +44,13 @@
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready( function() {
+        $('#thisIsMe').on('click', function(event) {
+          console.log("clicked")
+          $(this).fadeOut(1000)
+        });
+      });
+    </script>
   </body>
 </html>

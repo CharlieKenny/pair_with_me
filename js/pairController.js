@@ -214,7 +214,11 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
   };
 
   self.displayFinalPairs = function(){
-    alert("Ashleigh has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");
+    self.choice = "";
+    self.relations.forEach(function(relationship){
+     text = self.cohort[relationship.pair1-1].username + " is paired with " + self.cohort[relationship.pair2-1].username;
+     self.choice = self.choice + text + ".   ";
+   });
   };
 
 // removes a record from the blacklist record
