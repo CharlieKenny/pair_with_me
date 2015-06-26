@@ -31,7 +31,9 @@
             <span>{{maker.username}}</span>
             <span>{{maker.paired}}</span>
             <span>{{pairCtrl.pairedWithMe(maker)}}</span>
-            <button type="button" id='pairButton' ng-if="pairCtrl.isButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker)">Pair</button>
+            <button type="button" id='pairButton' ng-if="pairCtrl.isPairButtonDisplayed(maker)" ng-click="pairCtrl.pairWith(maker)">Pair</button>
+            <button type="button" id='blacklistButton' ng-if="pairCtrl.isBlackListButtonDisplayed(maker)" ng-click="pairCtrl.blackListMaker(maker)">Blacklist this person</button>
+            <button type="button" id='unBlacklistButton' ng-if="pairCtrl.isUnBlackListButtonDisplayed(maker)" ng-click="pairCtrl.unBlackListMaker(maker)">Un-Blacklist this person</button>
           </form>
         </div>
         <button type="button" id='RandomButton' ng-click="pairCtrl.shyPairWith()">Surprise Me</button>
