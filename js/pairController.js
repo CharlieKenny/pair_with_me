@@ -20,57 +20,7 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
   }
 
 // maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
-  self.cohort = [
-    {
-     name: "Alex",
-     gh_username: "AlexHandy1",
-     number: 1,
-     paired: false
-    },
-    {
-     name: "Ashleigh",
-     gh_username: "ashleigh090990",
-     number: 2,
-     paired: false
-    },
-    {
-     name: "Jennifer",
-     gh_username: "curlygirly",
-     number: 3,
-     paired: false
-    },
-    {
-     name: "Dan B",
-     gh_username: "dan-bolger",
-     number: 4,
-     paired: false
-    },
-    {
-     name: "Andy",
-     gh_username: "andygout",
-     number: 5,
-     paired: false
-    },
-    {
-     name: "Charlie",
-     gh_username: "charliekenny",
-     number: 6,
-     paired: false
-    },
-    {
-     name: "Fiona",
-     gh_username: "smarbaf",
-     number: 7,
-     paired: false
-    },
-    {
-     name: "Tim O",
-     gh_username: "timoxman",
-     number: 8,
-     paired: false
-    }
-  ]
-
+  // pairWithpp
   GetUsers.success(function(data) {
     console.log(data)
     self.cohort = data;
@@ -97,6 +47,7 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
       var relationship = {"pair1": yourself, "pair2": maker.pair_id};
       self.relations.push(relationship);
       self.choice = self.cohort[yourself-1].username + ' has been paired with ' + self.cohort[maker.pair_id-1].username;
+
     }
   };
 
@@ -129,6 +80,11 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
     else if ( self.cohort[yourself-1].paired === true ) return false
     else return true;
   };
+
+// decide if to display question
+  self.isQuestionDisplayed = function(){
+    return yourself;
+  }
 
   self.displayFinalPairs = function(){
     alert("Ashleigh has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");
