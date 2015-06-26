@@ -30,6 +30,15 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
       }
     }
   }
+// maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
+  // pairWithpp
+  GetUsers.success(function(data) {
+    console.log(data)
+    self.cohort = data;
+  }).error(function(data, status){
+    console.log(data, status);
+        self.cohort = [];
+  });
 
 // // maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
 //   self.cohort = [
@@ -83,8 +92,6 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
 //     }
 //   ]
 
-
-
   self.choice = '';
 
   self.relations =[
@@ -104,12 +111,14 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
       var relationship = {"pair1": yourself, "pair2": maker.pair_id};
       self.relations.push(relationship);
       self.choice = self.cohort[yourself-1].username + ' has been paired with ' + self.cohort[maker.pair_id-1].username;
+
     }
   };
 
 // sets the maker passed to be 'yourself'
   self.setYourself = function(maker){
     yourself = maker.pair_id;
+    self.userChosen = true;
   };
 
 // returns the number of times the maker passed in has been paired with 'yourself'
@@ -147,6 +156,11 @@ pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers
     else if (self._isOnBlacklist(maker)) return false
     else return true;
   };
+
+// decide if to display question
+  self.isQuestionDisplayed = function(){
+    return yourself;
+  }
 
 // checks whether to dispay the blacklist button
   this.isBlackListButtonDisplayed = function(maker){
