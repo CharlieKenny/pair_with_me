@@ -1,53 +1,91 @@
-pairWithMe.controller('PairWithMeCtrl', function() {
+pairWithMe.controller('PairWithMeCtrl', ['GetUsers', 'Search', function(GetUsers, Search) {
+
   var self = this;
 
   var yourself = 0;
 
-  self.choice = '';
+  window.onload = function() {
 
-// maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
-  self.cohort = [
-    {
-     username: "Alex",
-     pair_id: 1,
-     paired: false
-    },
-    {
-     username: "Ashleigh",
-     pair_id: 2,
-     paired: false
-    },
-    {
-     username: "Andy",
-     pair_id: 3,
-     paired: false
-    },
-    {
-     username: "Charlie",
-     pair_id: 4,
-     paired: false
-    },
-    {
-     username: "Dan B",
-     pair_id: 5,
-     paired: false
-    },
-    {
-     username: "Fiona",
-     pair_id: 6,
-     paired: false
-    },
-        {
-     username: "Jennifer",
-     pair_id: 7,
-     paired: false
-    },
-        {
-     username: "Tim O",
-     pair_id: 8,
-     paired: false
+    GetUsers.success(function(data) {
+      console.log(data)
+      self.cohort = data;
+      acquireAvatars();
+    }).error(function(data, status){
+      console.log(data, status);
+      self.cohort = [];
+    });
+
+    function acquireAvatars() {
+      self.cohort.forEach(function(student) {
+        Search.query(student.gh_username)
+        .then(collectResults);
+      });
+
+      function collectResults(response) {
+        self.cohort.forEach(function(student) {
+          if(student.gh_username == response.data.login) {
+            student['avatar_url'] = response.data.avatar_url;
+          }
+        });
+      }
     }
-  ];
+  }
+
+// // maybe better to split the relationships into a seperate data store, rather than include them within each maker within cohort
+//   self.cohort = [
+//     {
+//      name: "Alex",
+//      gh_username: "AlexHandy1",
+//      number: 1,
+//      paired: false
+//     },
+//     {
+//      name: "Ashleigh",
+//      gh_username: "ashleigh090990",
+//      number: 2,
+//      paired: false
+//     },
+//     {
+//      name: "Jennifer",
+//      gh_username: "curlygirly",
+//      number: 3,
+//      paired: false
+//     },
+//     {
+//      name: "Dan B",
+//      gh_username: "dan-bolger",
+//      number: 4,
+//      paired: false
+//     },
+//     {
+//      name: "Andy",
+//      gh_username: "andygout",
+//      number: 5,
+//      paired: false
+//     },
+//     {
+//      name: "Charlie",
+//      gh_username: "charliekenny",
+//      number: 6,
+//      paired: false
+//     },
+//     {
+//      name: "Fiona",
+//      gh_username: "smarbaf",
+//      number: 7,
+//      paired: false
+//     },
+//     {
+//      name: "Tim O",
+//      gh_username: "timoxman",
+//      number: 8,
+//      paired: false
+//     }
+//   ]
+
+
+
+  self.choice = '';
 
   self.relations =[
                     //  {"pair1": 6, "pair2": 7}
@@ -59,7 +97,7 @@ pairWithMe.controller('PairWithMeCtrl', function() {
                    ];
 
 // creates a pairing between yourself and the maker passed in
-  this.pairWith = function(maker){
+  self.pairWith = function(maker){
     if (yourself !== 0){
       self.cohort[maker.pair_id-1].paired = true;
       self.cohort[yourself-1].paired = true;
@@ -70,12 +108,12 @@ pairWithMe.controller('PairWithMeCtrl', function() {
   };
 
 // sets the maker passed to be 'yourself'
-  this.setYourself = function(maker){
+  self.setYourself = function(maker){
     yourself = maker.pair_id;
   };
 
 // returns the number of times the maker passed in has been paired with 'yourself'
-  this.pairedWithMe = function(maker){
+  self.pairedWithMe = function(maker){
     var noOfPairs = 0;
     self.relations.forEach(function(relationship){
       if ( relationship.pair1 === yourself && relationship.pair2 === maker.pair_id )
@@ -87,7 +125,7 @@ pairWithMe.controller('PairWithMeCtrl', function() {
   };
 
 // creates a relationship between 'yourself' and a random other'
-  this.shyPairWith = function(){
+  self.shyPairWith = function(){
     var x = this.findUnmatchedPair();
     this.pairWith(self.cohort[x]);
   };
@@ -100,7 +138,7 @@ pairWithMe.controller('PairWithMeCtrl', function() {
    };
 
 // checks whether to display the pair button next to each makers name
-  this.isPairButtonDisplayed = function(maker){
+  self.isPairButtonDisplayed = function(maker){
     // don't display the button, if you are the person selected, or you the maker already have a pair or yourself already has a pair.
     if ( yourself == 0 ) return false;  // can't pair if you haven't selected yourself
     if ( yourself === maker.pair_id ) return false
@@ -137,7 +175,7 @@ pairWithMe.controller('PairWithMeCtrl', function() {
   };
 
 // return true if the maker has blacklisted 'yourself' or 'yourself' has blacklisted the maker passed in.
-  this._isOnBlacklist = function(maker){
+  self._isOnBlacklist = function(maker){
     var returnvalue = false;
     self.blackList.forEach(function(blacklistPair){
       //this if statement is copied above - refactor?
@@ -154,21 +192,19 @@ pairWithMe.controller('PairWithMeCtrl', function() {
   };
 
 // checks whether to display the unblacklist button
-  this.isUnBlackListButtonDisplayed = function(maker){
+  self.isUnBlackListButtonDisplayed = function(maker){
     if ( yourself == 0 ) return false;
     if ( yourself === maker.pair_id ) return false;
     if (self._isMakerBlacklisted(maker)) return true;
     return false;
   };
 
-
-  this.displayFinalPairs = function(){
+  self.displayFinalPairs = function(){
     alert("Ashleigh has paired with Alex again, \nTim has paired with Andy, \nStefan is with Bristol ");
-
   };
 
 // removes a record from the blacklist record
-  this.unBlackListMaker = function(maker){
+  self.unBlackListMaker = function(maker){
     self.blackList.forEach(function(blacklistPair,index){
       if ( blacklistPair.blacklister === yourself && blacklistPair.blacklisted === maker.pair_id ) {
         var x = self.blackList.splice(index,1);
@@ -177,5 +213,4 @@ pairWithMe.controller('PairWithMeCtrl', function() {
     });
   };
 
-
-});
+}]);
